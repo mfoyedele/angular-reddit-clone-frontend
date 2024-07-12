@@ -1,0 +1,17 @@
+.references {
+    background-color: #eeeeee;
+    font-size: .75em;
+    p {
+        margin: 0;
+        letter-spacing: initial;
+        line-height: 2;
+        font-size: 1em;
+    }
+}
+
+.grid__wrapper {
+    --ig-size: var(--ig-size-small);
+    margin: 0 auto;
+    padding: 16px;
+    height: 450px
+}

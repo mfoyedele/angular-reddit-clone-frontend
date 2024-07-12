@@ -1,0 +1,19 @@
+@use '../../variables' as *;
+
+$custom-theme: grid-theme(
+    $sorted-header-icon-color: #ffb06a,
+    $sortable-header-icon-hover-color: black
+);
+
+:host ::ng-deep {
+    @include css-vars($custom-theme);
+}
+
+.grid__wrapper {
+    margin: 0 auto;
+    padding: 16px;
+
+    igx-select {
+        --ig-size: var(--ig-size-small);
+    }
+}

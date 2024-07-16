@@ -34,7 +34,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
                                 <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
-                                <span *ngIf="">
+                                <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
                                     Please provide a valid Password
                                 </span>  
                             </div>

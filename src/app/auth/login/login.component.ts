@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { NgIf, NgClass } from '@angular/common';
 import { LoginRequestPayload } from './login-request.payload';
 import { AuthService } from '../shared/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -9,7 +10,10 @@ import { throwError } from 'rxjs';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  standalone: true,
+  imports: [NgIf, NgClass]
+
 })
 export class LoginComponent implements OnInit {
 

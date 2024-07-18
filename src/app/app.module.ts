@@ -18,9 +18,9 @@ import { ToastrModule } from 'ngx-toastr';
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
-        // NgxWebstorageModule.forRoot(),
+        NgxWebstorageModule.forRoot(),
         // BrowserAnimationsModule,
-        // ToastrModule.forRoot(),
+        ToastrModule.forRoot(),
 
     ],
     declarations: [

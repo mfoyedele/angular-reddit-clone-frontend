@@ -8,7 +8,7 @@ import { AccountService, AlertService } from '@app/_services'
 import { LoginRequestPayload } from '@app/_models';
 
 @Component({
-    templateUrl: 'login.component.html',
+    templateUrl: 'login.component.html', styleUrls: ['login.component.css'],
     standalone: true,
     imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
 })

@@ -12,7 +12,7 @@ export const APP_ROUTES: Routes = [
   { path: 'login', component: LoginComponent },
   
 
-   // otherwise redirect to home
-   { path: '**', redirectTo: '' }
+  //  // otherwise redirect to home
+  //  { path: '**', redirectTo: '' }
 ];
 

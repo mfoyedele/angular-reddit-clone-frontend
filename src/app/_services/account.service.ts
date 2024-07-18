@@ -8,12 +8,12 @@ import { environment } from '@environments/environment';
 // import { User } from '@app/_models';
 import { SignupRequestPayload } from '@app/_models';
 import { LoginRequestPayload } from '@app/_models';
-
+import { LoginResponse } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<SignupRequestPayload | null>;
-    public user: Observable<SignupRequestPayload | null>;
+    private userSubject: BehaviorSubject<LoginResponse | null>;
+    public user: Observable<LoginResponse | null>;
 
     constructor(
         private router: Router,
@@ -27,8 +27,8 @@ export class AccountService {
         return this.userSubject.value;
     }
 
-    login(username: string, password: string) {
-        return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { username, password })
+    login(loginRequestPayload: LoginRequestPayload) {
+        return this.http.post<LoginResponse>(`${environment.apiUrl}/users/authenticate`, {loginRequestPayload })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));

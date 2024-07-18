@@ -3,6 +3,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 import { AccountService, AlertService } from '@app/_services'
 import { LoginRequestPayload } from '@app/_models';
@@ -21,11 +22,17 @@ export class LoginComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,        
-        private route: ActivatedRoute,
+        private activatedRoute: ActivatedRoute,
         private router: Router,
+        private toastr: ToastrService,
         private accountService: AccountService,
         private alertService: AlertService
     ) {
+        this.loginRequestPayload = {
+            username: '',
+            password: ''
+          };
+      
         // redirect to home if already logged in
         if (this.accountService.userValue) {
             this.router.navigate(['/']);
@@ -37,8 +44,15 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
-        this.registerSuccessMessage = 'Please Check your inbox for activation email '
+
+        this.activatedRoute.queryParams
+      .subscribe(params => {
+        if (params.registered !== undefined && params.registered === 'true') {
+          this.toastr.success('Signup Successful');
+          this.registerSuccessMessage = 'Please Check your inbox for activation email '
             + 'activate your account before you Login!';
+        }
+      });
     }
 
     // convenience getter for easy access to form fields
@@ -61,7 +75,7 @@ export class LoginComponent implements OnInit {
             .subscribe({
                 next: () => {
                     // get return url from query parameters or default to home page
-                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    const returnUrl = this.activatedRoute.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
                 },
                 error: error => {

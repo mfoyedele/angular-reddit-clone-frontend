@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services'
+import { LoginRequestPayload } from '@app/_models';
 
 @Component({
     templateUrl: 'login.component.html',
@@ -13,11 +14,12 @@ import { AccountService, AlertService } from '@app/_services'
 })
 export class LoginComponent implements OnInit {
     form!: FormGroup;
+    loginRequestPayload!: LoginRequestPayload;
     loading = false;
     submitted = false;
 
     constructor(
-        private formBuilder: FormBuilder,
+        private formBuilder: FormBuilder,        
         private route: ActivatedRoute,
         private router: Router,
         private accountService: AccountService,
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.f.username.value, this.f.password.value)
+        this.accountService.login(this.loginRequestPayload)
             .pipe(first())
             .subscribe({
                 next: () => {

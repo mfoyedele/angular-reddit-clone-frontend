@@ -1,4 +1,4 @@
-<header>
+<!-- <header>
     <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
         <div class="flex-grow-1">
             <a aria-label="Home" class="logo" routerLink="/">
@@ -22,11 +22,19 @@
                 </div>
             </div>     
     </nav>
-</header>
+</header> -->
 
+<!-- nav -->
+<nav class="navbar navbar-expand navbar-dark bg-dark px-3" *ngIf="user">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+        <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+        <button class="btn btn-link nav-item nav-link" (click)="logout()">Logout</button>
+    </div>
+</nav>
 
 <!-- main app container -->
 <div class="container">
-    
+    <alert></alert>
     <router-outlet></router-outlet>
 </div>

@@ -7,14 +7,14 @@
                     <h4>Register</h4>
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="signupForm" (ngSubmit)="signup()">
+                    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
                         <div class="form-group row">
                             <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail
                                 Address</label>
                             <div class="col-md-6">
-                                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" name="email-address" required
+                                <input type="text" [formControlName]="'email'" id="email_address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" name="email-address"  required
                                     autofocus>
-                                <span *ngIf="!signupForm.get('email').valid && signupForm.get('email').touched">
+                                <span *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                     Please provide a valid email
                                 </span>                                    
                             </div>
@@ -23,8 +23,8 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right">User Name</label>
                             <div class="col-md-6">
-                                <input type="text" [formControlName]="'username'"class="form-control" required autofocus>
-                                <span *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">
+                                <input type="text" [formControlName]="'username'"class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" required autofocus>
+                                <span *ngIf="submitted && f.username.errors" class="invalid-feedback">
                                     Please provide a valid username
                                 </span>                                 
                             </div>
@@ -33,10 +33,11 @@
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
                             <div class="col-md-6">
-                                <input type="password" [formControlName]="'password'" id="password" class="form-control" name="password" required>
-                                <span *ngIf="!signupForm.get('password').valid && signupForm.get('password').touched">
-                                    Please provide a valid Password
-                                </span>  
+                                <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required">Password is required</div>
+                                    <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                                </div> 
                             </div>
                         </div>
  
@@ -44,7 +45,7 @@
                             <button type="submit" class="sign-up">
                                 Sign Up
                             </button>
-                            <span style="padding-left: 15px">Existing user? <a routerLink="/login">Log In</a></span>
+                            <span style="padding-left: 15px">Existing user? <a routerLink="../login">Log In</a></span>
                         </span>
                     </form>
                 </div>

@@ -5,14 +5,16 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
+import { SignupRequestPayload } from '@app/_models';
 
 @Component({
-    templateUrl: 'register.component.html',
+    templateUrl: 'register.component.html', styleUrls: ['register.component.css'],
     standalone: true,
     imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
 })
 export class RegisterComponent implements OnInit {
-    form!: FormGroup;
+    signupForm!: FormGroup;
+    signupRequestPayload!: SignupRequestPayload;
     loading = false;
     submitted = false;
 
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
         private accountService: AccountService,
         private alertService: AlertService
     ) {
+        
         // redirect to home if already logged in
         if (this.accountService.userValue) {
             this.router.navigate(['/']);
@@ -30,16 +33,15 @@ export class RegisterComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.form = this.formBuilder.group({
-            firstName: ['', Validators.required],
-            lastName: ['', Validators.required],
+        this.signupForm = this.formBuilder.group({
             username: ['', Validators.required],
+            email: ['', Validators.required],            
             password: ['', [Validators.required, Validators.minLength(6)]]
         });
     }
 
     // convenience getter for easy access to form fields
-    get f() { return this.form.controls; }
+    get f() { return this.signupForm.controls; }
 
     onSubmit() {
         this.submitted = true;
@@ -48,12 +50,12 @@ export class RegisterComponent implements OnInit {
         this.alertService.clear();
 
         // stop here if form is invalid
-        if (this.form.invalid) {
+        if (this.signupForm.invalid) {
             return;
         }
 
         this.loading = true;
-        this.accountService.register(this.form.value)
+        this.accountService.register(this.signupForm.value)
             .pipe(first())
             .subscribe({
                 next: () => {

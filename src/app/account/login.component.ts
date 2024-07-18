@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     form!: FormGroup;
     loginRequestPayload!: LoginRequestPayload;
     loading = false;
+    registerSuccessMessage!: string;
     submitted = false;
 
     constructor(
@@ -36,6 +37,8 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+        this.registerSuccessMessage = 'Please Check your inbox for activation email '
+            + 'activate your account before you Login!';
     }
 
     // convenience getter for easy access to form fields

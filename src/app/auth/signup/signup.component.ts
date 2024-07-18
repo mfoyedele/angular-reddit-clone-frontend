@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { SignupRequestPayload } from './singup-request.payload';
 import { AuthService } from '../shared/auth.service';
 import { NgIf, NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css'],
   standalone: true,
-  imports: [NgIf, NgClass]
+  imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
 })
 export class SignupComponent implements OnInit {
 

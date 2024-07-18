@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIf, NgClass } from '@angular/common';
 import { LoginRequestPayload } from './login-request.payload';
 import { AuthService } from '../shared/auth.service';
-import { Router, ActivatedRoute } from '@angular/router';
+
 import { ToastrService } from 'ngx-toastr';
 import { throwError } from 'rxjs';
 
@@ -12,7 +13,7 @@ import { throwError } from 'rxjs';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [NgIf, NgClass]
+  imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
 
 })
 export class LoginComponent implements OnInit {

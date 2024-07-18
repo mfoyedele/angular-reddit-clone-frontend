@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     registerSuccessMessage!: string;
     submitted = false;
+    isError!: boolean;
 
     constructor(
         private formBuilder: FormBuilder,        
@@ -74,6 +75,7 @@ export class LoginComponent implements OnInit {
                 error: error => {
                     this.alertService.error(error);
                     this.loading = false;
+                    this.isError = true;
                 }
             });
     }

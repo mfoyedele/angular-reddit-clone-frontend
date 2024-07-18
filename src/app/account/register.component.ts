@@ -25,7 +25,12 @@ export class RegisterComponent implements OnInit {
         private accountService: AccountService,
         private alertService: AlertService
     ) {
-        
+        this.signupRequestPayload = {
+            username: '',
+            email: '',
+            password: ''
+          };
+          
         // redirect to home if already logged in
         if (this.accountService.userValue) {
             this.router.navigate(['/']);

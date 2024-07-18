@@ -3,15 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 
-const routes: Routes = [
+export const APP_ROUTES: Routes = [
 
   { path: 'sign-up', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   
+
+   // otherwise redirect to home
+   { path: '**', redirectTo: '' }
 ];
 
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule { }

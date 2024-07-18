@@ -5,8 +5,7 @@ import { NgIf, NgClass } from '@angular/common';
   selector: 'app-header',
   templateUrl: './header.component.html',  
   styleUrl: './header.component.css',
-  standalone: true,
-  imports: [NgIf, NgClass]
+  standalone: true
 })
 export class HeaderComponent {
 

@@ -37,6 +37,10 @@ export class AccountService {
             }));
     }
 
+    getJwtToken() {
+        return localStorage.retrieve('authenticationToken');
+      }
+
     logout() {
         // remove user from local storage and set current user to null
         localStorage.removeItem('user');
@@ -47,5 +51,9 @@ export class AccountService {
     register(user: SignupRequestPayload) {
         return this.http.post(`${environment.apiUrl}/api/auth/signup`, user);
     }
+
+    isLoggedIn(): boolean {
+        return this.getJwtToken() != null;
+      }
 
 }

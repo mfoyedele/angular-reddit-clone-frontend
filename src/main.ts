@@ -12,8 +12,8 @@ bootstrapApplication(AppComponent, {
         provideRouter(APP_ROUTES),
         provideHttpClient(
             withInterceptors([
-                // jwtInterceptor, 
-                // errorInterceptor,                
+                jwtInterceptor, 
+                errorInterceptor,                
 
             ])
         ),        

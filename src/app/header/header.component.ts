@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgClass, NgIf } from '@angular/common';
 
 import { AccountService } from '@app/_services';
@@ -11,7 +11,7 @@ import { AccountService } from '@app/_services';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css'],
     standalone: true,
-    imports: [NgClass, NgIf]
+    imports: [NgClass, NgIf, RouterLink]
   })
 
   export class HeaderComponent implements OnInit {

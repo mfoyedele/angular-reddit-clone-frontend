@@ -6,7 +6,7 @@ import { AccountService } from '@app/_services';
 import { HeaderComponent } from '@app/header/header.component';
 
 @Component({
-    templateUrl: 'home.component.html',
+    templateUrl: 'home.component.html', styleUrls: ['home.component.css'],
     standalone: true,    
     imports: [NgClass, NgIf, HeaderComponent]
 })

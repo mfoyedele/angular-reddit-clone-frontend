@@ -15,10 +15,11 @@ import { SignupRequestPayload } from '@app/_models';
 export class RegisterComponent implements OnInit {
     signupRequestPayload: SignupRequestPayload;
     signupForm!: FormGroup;
+    loading = false;
+    submitted = false;
 
     constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
+       
         private router: Router,
         private accountService: AccountService,
         private alertService: AlertService
@@ -44,10 +45,17 @@ export class RegisterComponent implements OnInit {
     get f() { return this.signupForm.controls; }
 
     onSubmit() {
-        this.signupRequestPayload.email = this.signupForm.get('email').value;
-        this.signupRequestPayload.username = this.signupForm.get('username').value;
-        this.signupRequestPayload.password = this.signupForm.get('password').value;
- 
+        this.submitted = true;
+
+        // reset alert on submit
+        this.alertService.clear();
+
+        // stop here if form is invalid
+        if (this.signupForm.invalid) {
+            return;
+        }
+
+        this.loading = true;
         this.accountService.register(this.signupForm.value)
             .pipe(first())
             .subscribe({
@@ -57,7 +65,7 @@ export class RegisterComponent implements OnInit {
                 },
                 error: error => {
                     this.alertService.error(error);
-                    
+                    this.loading = false;
                 }
             });
     }

@@ -11,9 +11,14 @@ import { HeaderComponent } from '@app/header/header.component';
     imports: [NgClass, NgIf, HeaderComponent]
 })
 export class HomeComponent {
-    user: LoginResponse | null;
 
-    constructor(private accountService: AccountService) {
-        this.user = this.accountService.userValue;
+  
+    constructor() {
+      
     }
-}
+  
+    ngOnInit(): void {
+    }
+  
+  }
+  

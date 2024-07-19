@@ -3,6 +3,7 @@ import { NgClass, NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { CommonModule } from '@angular/common';
 
 import { AccountService, AlertService } from '@app/_services'
 import { LoginRequestPayload } from '@app/_models';
@@ -10,7 +11,7 @@ import { LoginRequestPayload } from '@app/_models';
 @Component({
     templateUrl: 'login.component.html', styleUrls: ['login.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
+    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink, CommonModule]
 })
 export class LoginComponent implements OnInit {
     form!: FormGroup;
@@ -81,7 +82,7 @@ export class LoginComponent implements OnInit {
                     
                 },
                 error: error => {
-                    this.alertService.error(error);
+                    this.alertService.error("Login Failed. Please check your credentials and try again.");
                     this.loading = false;
                     this.isError = true;
                 }

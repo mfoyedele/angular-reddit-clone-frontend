@@ -10,7 +10,7 @@ import { HeaderComponent } from './header/header.component';
 @Component({
     selector: 'app-root', templateUrl: 'app.component.html',
     standalone: true,
-    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent, HeaderComponent]
+    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent]
 })
 export class AppComponent {
     title = 'angular-reddit-clone';

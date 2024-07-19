@@ -86,7 +86,7 @@ export class AccountService {
       }
     
       getUserName() {
-        return JSON.parse(localStorage.getItem('username')!);
+        return localStorage.getItem('username')!;
       }
       getRefreshToken() {
         return localStorage.getItem('refreshToken');

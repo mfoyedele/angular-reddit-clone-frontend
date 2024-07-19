@@ -12,13 +12,13 @@ import { AlertComponent } from './_components/alert.component';
     imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent]
 })
 export class AppComponent {
-    user?: User | null;
+    // user?: User | null;
 
-    constructor(private accountService: AccountService) {
-        this.accountService.user.subscribe(x => this.user = x);
-    }
+    // constructor(private accountService: AccountService) {
+    //     this.accountService.user.subscribe(x => this.user = x);
+    // }
 
-    logout() {
-        this.accountService.logout();
-    }
+    // logout() {
+    //     this.accountService.logout();
+    // }
 }

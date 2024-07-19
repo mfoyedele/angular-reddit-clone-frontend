@@ -1,19 +1,23 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-// import { User } from '@app/_models';
+import { User } from '@app/_models';
 import { SignupRequestPayload } from '@app/_models';
 import { LoginRequestPayload } from '@app/_models';
 import { LoginResponse } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    private userSubject: BehaviorSubject<LoginResponse | null>;
-    public user: Observable<LoginResponse | null>;
+  @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
+  @Output() username: EventEmitter<string> = new EventEmitter();
+
+  
+    private userSubject: BehaviorSubject<User | null>;
+    public user: Observable<User | null>;
 
     constructor(
         private router: Router,
@@ -28,7 +32,7 @@ export class AccountService {
     }
 
     login(loginRequestPayload: LoginRequestPayload) {
-        return this.http.post<LoginResponse>(`${environment.apiUrl}/users/authenticate`, {loginRequestPayload })
+        return this.http.post<LoginResponse>(`${environment.apiUrl}/api/auth/login`, {loginRequestPayload })
             .pipe(map(user => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('user', JSON.stringify(user));

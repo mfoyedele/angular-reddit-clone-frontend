@@ -63,7 +63,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.accountService.login(this.loginRequestPayload)
+        this.accountService.login(this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {

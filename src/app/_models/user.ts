@@ -1,8 +1,6 @@
-export class User {
-    id?: string;
+export class User {    
+    authenticationToken?: string;
+    refreshToken?: string;
+    expiresAt?: Date;
     username?: string;
-    password?: string;
-    firstName?: string;
-    lastName?: string;
-    token?: string;
 }

@@ -31,6 +31,10 @@ export class AccountService {
         return this.userSubject.value;
     }
 
+    register(user: SignupRequestPayload) {
+        return this.http.post(`${environment.apiUrl}/api/auth/signup`, user, { responseType: 'text' });
+    }
+
     login(loginRequestPayload: LoginRequestPayload) {
         return this.http.post<LoginResponse>(`${environment.apiUrl}/api/auth/login`, {loginRequestPayload })
             .pipe(map(user => {
@@ -50,11 +54,7 @@ export class AccountService {
         localStorage.removeItem('user');
         this.userSubject.next(null);
         this.router.navigate(['/account/login']);
-    }
-
-    register(user: SignupRequestPayload) {
-        return this.http.post(`${environment.apiUrl}/api/auth/signup`, user);
-    }
+    }    
 
     isLoggedIn(): boolean {
         return this.getJwtToken() != null;

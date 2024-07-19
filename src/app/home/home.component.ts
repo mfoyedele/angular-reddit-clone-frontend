@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { User } from '@app/_models';
+import { LoginResponse } from '@app/_models';
 import { AccountService } from '@app/_services';
 
 @Component({
@@ -8,7 +8,7 @@ import { AccountService } from '@app/_services';
     standalone: true
 })
 export class HomeComponent {
-    user: User | null;
+    user: LoginResponse | null;
 
     constructor(private accountService: AccountService) {
         this.user = this.accountService.userValue;

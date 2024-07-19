@@ -3,7 +3,7 @@ import { NgIf } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 import { AccountService } from './_services';
-import { User } from './_models';
+import { LoginResponse } from './_models';
 import { AlertComponent } from './_components/alert.component';
 
 @Component({
@@ -12,7 +12,7 @@ import { AlertComponent } from './_components/alert.component';
     imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent]
 })
 export class AppComponent {
-    user?: User | null;
+    user?: LoginResponse | null;
 
     constructor(private accountService: AccountService) {
         this.accountService.user.subscribe(x => this.user = x);

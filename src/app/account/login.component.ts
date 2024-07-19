@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
         .subscribe(params => {
           if (params.registered !== undefined && params.registered === 'true') {
             // this.toastr.success('Signup Successful');
+            this.alertService.success('Registration successful', true);
             this.registerSuccessMessage = 'Please Check your inbox for activation email '
               + 'activate your account before you Login!';
           }
@@ -77,6 +78,7 @@ export class LoginComponent implements OnInit {
                     // get return url from query parameters or default to home page
                     const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                     this.router.navigateByUrl(returnUrl);
+                    this.alertService.success('Login successful', true);
                     // this.toastr.success('Login Successful');
                 },
                 error: error => {

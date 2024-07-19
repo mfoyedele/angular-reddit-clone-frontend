@@ -1,8 +1,8 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
 // import { User } from '@app/_models';
@@ -15,13 +15,17 @@ export class AccountService {
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
 
+  refreshTokenPayload = {
+    refreshToken: this.getRefreshToken(),
+    username: this.getUserName()
+  }
   
     private userSubject: BehaviorSubject<LoginResponse | null>;
     public user: Observable<LoginResponse | null>;
 
     constructor(
         private router: Router,
-        private http: HttpClient
+        private httpClient: HttpClient
     ) {
         this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
         this.user = this.userSubject.asObservable();
@@ -32,11 +36,11 @@ export class AccountService {
     }
 
     register(signupRequestPayload: SignupRequestPayload): Observable<any> {
-        return this.http.post(`${environment.apiUrl}/api/auth/signup`,  signupRequestPayload, { responseType: 'text' });
+        return this.httpClient.post(`${environment.apiUrl}/api/auth/signup`,  signupRequestPayload, { responseType: 'text' });
     }
 
     login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
-        return this.http.post<LoginResponse>(`${environment.apiUrl}/api/auth/login`, loginRequestPayload )
+        return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/api/auth/login`, loginRequestPayload )
             .pipe(map(data => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('authenticationToken', data.authenticationToken);
@@ -51,18 +55,44 @@ export class AccountService {
     }
 
     getJwtToken() {
-        return localStorage.retrieve('authenticationToken');
+        return localStorage.getItem('authenticationToken');
       }
-
-    logout() {
-        // remove user from local storage and set current user to null
-        localStorage.removeItem('user');
-        this.userSubject.next(null);
-        this.router.navigate(['/account/login']);
-    }
-
-
-    isLoggedIn(): boolean {
+    
+      refreshToken() {
+        return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/api/auth/refresh/token`,
+          this.refreshTokenPayload)
+          .pipe(tap(response => {
+            localStorage.removeItem('authenticationToken');
+            localStorage.removeItem('expiresAt');
+    
+            localStorage.setItem('authenticationToken',
+              response.authenticationToken);
+            localStorage.setItem('expiresAt', response.expiresAt.toString());
+          }));
+      }
+    
+      logout() {
+        this.httpClient.post('http://localhost:8080/api/auth/logout', this.refreshTokenPayload,
+          { responseType: 'text' })
+          .subscribe(data => {
+            console.log(data);
+          }, error => {
+            throwError(error);
+          })
+        localStorage.removeItem('authenticationToken');
+        localStorage.removeItem('username');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('expiresAt');
+      }
+    
+      getUserName() {
+        return localStorage.getItem('username');
+      }
+      getRefreshToken() {
+        return localStorage.getItem('refreshToken');
+      }
+    
+      isLoggedIn(): boolean {
         return this.getJwtToken() != null;
       }
 

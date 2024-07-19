@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
-// import { AuthService } from '../auth/shared/auth.service';
 import { Router } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
 
 import { AccountService } from '@app/_services';
 
@@ -9,7 +9,9 @@ import { AccountService } from '@app/_services';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
-    styleUrls: ['./header.component.css']
+    styleUrls: ['./header.component.css'],
+    standalone: true,
+    imports: [NgClass, NgIf]
   })
 
   export class HeaderComponent implements OnInit {

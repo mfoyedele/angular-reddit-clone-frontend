@@ -5,20 +5,13 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AccountService } from './_services';
 import { LoginResponse } from './_models';
 import { AlertComponent } from './_components/alert.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
     selector: 'app-root', templateUrl: 'app.component.html',
     standalone: true,
-    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent]
+    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, AlertComponent, HeaderComponent]
 })
 export class AppComponent {
-    user?: LoginResponse | null;
-
-    constructor(private accountService: AccountService) {
-        this.accountService.user.subscribe(x => this.user = x);
-    }
-
-    logout() {
-        this.accountService.logout();
-    }
+    title = 'angular-reddit-clone';
 }

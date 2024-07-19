@@ -27,10 +27,16 @@ export class LoginComponent implements OnInit {
         private accountService: AccountService,
         private alertService: AlertService,
     ) {
+
+        this.loginRequestPayload = {
+            username: '',
+            password: ''
+          };
+
         // redirect to home if already logged in
-        // if (this.accountService.userValue) {
-        //     this.router.navigate(['/']);
-        // }
+        if (this.accountService.userValue) {
+            this.router.navigate(['/']);
+        }
     }
 
     ngOnInit() {
@@ -38,6 +44,7 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', Validators.required]
         });
+
         this.route.queryParams
         .subscribe(params => {
           if (params.registered !== undefined && params.registered === 'true') {

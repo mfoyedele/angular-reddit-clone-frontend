@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { HeaderComponent } from '@app/header/header.component';
 import { PostModel } from '@app/shared/post-model';
+import { PostService } from '@app/shared/post.service';
 
 @Component({
     templateUrl: 'home.component.html', styleUrls: ['home.component.css'],
@@ -11,11 +12,13 @@ import { PostModel } from '@app/shared/post-model';
 })
 export class HomeComponent implements OnInit{
 
-    posts$: Array<PostModel> = [];
+    posts: Array<PostModel> = [];
 
   
-    constructor() {
-      
+    constructor(private postService: PostService) {
+        this.postService.getAllPosts().subscribe(post => {
+            this.posts = post;
+          });      
     }
   
     ngOnInit(): void {

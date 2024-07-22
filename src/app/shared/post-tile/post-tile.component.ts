@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-post-tile',
   templateUrl: './post-tile.component.html',
   styleUrls: ['./post-tile.component.css'],
+  standalone: true,
   encapsulation: ViewEncapsulation.None,
 })
 export class PostTileComponent implements OnInit {

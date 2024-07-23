@@ -27,7 +27,8 @@
     font-weight: bold;
     opacity: 1;
 }
-sturl, .postname{    
+
+.posturl, .postname{    
     color: black;
 }
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { SubredditModel } from 'src/app/subreddit/subreddit-response';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { NgClass, NgIf } from '@angular/common';
 import { PostService } from 'src/app/shared/post.service';
 import { SubredditService } from 'src/app/subreddit/subreddit.service';
 import { throwError } from 'rxjs';
@@ -10,13 +11,15 @@ import { CreatePostPayload } from './create-post.payload';
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
-  styleUrls: ['./create-post.component.css']
+  styleUrls: ['./create-post.component.css'],
+  standalone: true,
+  imports: [NgClass, NgIf, RouterLink]
 })
 export class CreatePostComponent implements OnInit {
 
-  createPostForm: FormGroup;
+  createPostForm!: FormGroup;
   postPayload: CreatePostPayload;
-  subreddits: Array<SubredditModel>;
+  subreddits!: Array<SubredditModel>;
 
   constructor(private router: Router, private postService: PostService,
     private subredditService: SubredditService) {

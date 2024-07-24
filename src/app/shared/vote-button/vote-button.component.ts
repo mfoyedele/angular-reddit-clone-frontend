@@ -4,7 +4,8 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { VotePayload } from './vote-payload';
 import { VoteType } from './vote-type';
 import { VoteService } from '../vote.service';
-import { AuthService } from 'src/app/auth/shared/auth.service';
+// import { AuthService } from 'src/app/auth/shared/auth.service';
+import { AccountService } from '@app/_services';
 import { PostService } from '../post.service';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
@@ -28,7 +29,7 @@ export class VoteButtonComponent implements OnInit {
   isLoggedIn: boolean;
 
   constructor(private voteService: VoteService,
-    private authService: AuthService,
+    private authService: AccountService,
     private postService: PostService, private toastr: ToastrService) {
 
     this.votePayload = {

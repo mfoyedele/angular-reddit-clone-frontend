@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormGroup, Validators, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { SubredditModel } from 'src/app/subreddit/subreddit-response';
 import { Router, RouterLink } from '@angular/router';
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { PostService } from 'src/app/shared/post.service';
 import { SubredditService } from 'src/app/subreddit/subreddit.service';
-import { throwError } from 'rxjs';
+import { first, throwError } from 'rxjs';
 import { CreatePostPayload } from './create-post.payload';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @Component({
   selector: 'app-create-post',
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink]
+  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule, EditorModule]
 })
 export class CreatePostComponent implements OnInit {
 
   createPostForm!: FormGroup;
   postPayload: CreatePostPayload;
+  submitted = false;
   subreddits!: Array<SubredditModel>;
 
   constructor(private router: Router, private postService: PostService,
@@ -45,21 +47,30 @@ export class CreatePostComponent implements OnInit {
     });
   }
 
+   // convenience getter for easy access to form fields
+   get f() { return this.createPostForm.controls; }
+
   createPost() {
-    this.postPayload.postName = this.createPostForm.get('postName').value;
-    this.postPayload.subredditName = this.createPostForm.get('subredditName').value;
-    this.postPayload.url = this.createPostForm.get('url').value;
-    this.postPayload.description = this.createPostForm.get('description').value;
+    this.submitted = true;
 
-    this.postService.createPost(this.postPayload).subscribe((data) => {
-      this.router.navigateByUrl('/');
-    }, error => {
+     // stop here if form is invalid
+     if (this.createPostForm.invalid) {
+        return;
+    }
+    
+    this.postService.createPost(this.createPostForm.value)
+    .pipe(first())
+    .subscribe({
+        next: () => {
+            this.router.navigateByUrl('/');
+        },
+    error: error => {
       throwError(error);
-    })
+    }
+  });
   }
-
+  
   discardPost() {
     this.router.navigateByUrl('/');
   }
-
 }

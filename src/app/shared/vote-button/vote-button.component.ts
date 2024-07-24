@@ -4,7 +4,6 @@ import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
 import { VotePayload } from './vote-payload';
 import { VoteType } from './vote-type';
 import { VoteService } from '../vote.service';
-// import { AuthService } from 'src/app/auth/shared/auth.service';
 import { AccountService } from '@app/_services';
 import { PostService } from '../post.service';
 import { throwError } from 'rxjs';
@@ -20,13 +19,13 @@ imports: [NgClass, NgIf]
 })
 export class VoteButtonComponent implements OnInit {
 
-  @Input() post: PostModel;
+  @Input() post!: PostModel;
   votePayload: VotePayload;
   faArrowUp = faArrowUp;
   faArrowDown = faArrowDown;
-  upvoteColor: string;
-  downvoteColor: string;
-  isLoggedIn: boolean;
+  upvoteColor!: string;
+  downvoteColor!: string;
+  isLoggedIn!: boolean;
 
   constructor(private voteService: VoteService,
     private authService: AccountService,

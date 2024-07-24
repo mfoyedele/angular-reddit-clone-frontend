@@ -46,9 +46,9 @@ export class CreateSubredditComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.createSubredditForm.invalid) {
-    //     return;
-    // }
+    if (this.createSubredditForm.invalid) {
+        return;
+    }
 
    
     this.subredditService.createSubreddit(this.createSubredditForm.value)

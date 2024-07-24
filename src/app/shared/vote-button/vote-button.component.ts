@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostModel } from '../post-model';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { VotePayload } from './vote-payload';
 import { VoteType } from './vote-type';
 import { VoteService } from '../vote.service';
@@ -8,14 +9,14 @@ import { AccountService } from '@app/_services';
 import { PostService } from '../post.service';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-vote-button',
   templateUrl: './vote-button.component.html',
   styleUrls: ['./vote-button.component.css'],
   standalone: true,    
-imports: [NgClass, NgIf]
+  imports: [NgClass, NgIf, CommonModule]
 })
 export class VoteButtonComponent implements OnInit {
 
@@ -30,7 +31,7 @@ export class VoteButtonComponent implements OnInit {
   constructor(private voteService: VoteService,
     private authService: AccountService,
     private postService: PostService, private toastr: ToastrService) {
-
+      
     this.votePayload = {
       voteType: undefined,
       postId: undefined

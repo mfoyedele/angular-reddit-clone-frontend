@@ -8,11 +8,14 @@ import { AuthService } from 'src/app/auth/shared/auth.service';
 import { PostService } from '../post.service';
 import { throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-vote-button',
   templateUrl: './vote-button.component.html',
-  styleUrls: ['./vote-button.component.css']
+  styleUrls: ['./vote-button.component.css'],
+  standalone: true,    
+imports: [NgClass, NgIf]
 })
 export class VoteButtonComponent implements OnInit {
 

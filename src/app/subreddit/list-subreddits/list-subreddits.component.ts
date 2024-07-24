@@ -15,7 +15,7 @@ import { SideBarComponent } from "../../shared/side-bar/side-bar.component";
 })
 export class ListSubredditsComponent implements OnInit {
 
-  subreddits: Array<SubredditModel>;
+  subreddits!: Array<SubredditModel>;
   constructor(private subredditService: SubredditService) { }
 
   ngOnInit() {

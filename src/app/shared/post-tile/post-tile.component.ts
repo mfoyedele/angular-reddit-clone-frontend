@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { PostService } from '../post.service';
 import { PostModel } from '../post-model';
 import { faComments } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +10,7 @@ import { Router } from '@angular/router';
   templateUrl: './post-tile.component.html',
   styleUrls: ['./post-tile.component.css'],
   standalone: true,
+  imports: [NgClass, NgIf, CommonModule],
   encapsulation: ViewEncapsulation.None,
 })
 export class PostTileComponent implements OnInit {

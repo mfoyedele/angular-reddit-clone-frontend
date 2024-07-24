@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PostModel } from '../post-model';
 import { faArrowUp, faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { VotePayload } from './vote-payload';
 import { VoteType } from './vote-type';
 import { VoteService } from '../vote.service';
@@ -16,7 +16,7 @@ import { CommonModule, NgClass, NgIf } from '@angular/common';
   templateUrl: './vote-button.component.html',
   styleUrls: ['./vote-button.component.css'],
   standalone: true,    
-  imports: [NgClass, NgIf, CommonModule]
+  imports: [NgClass, NgIf, CommonModule, FontAwesomeModule]
 })
 export class VoteButtonComponent implements OnInit {
 

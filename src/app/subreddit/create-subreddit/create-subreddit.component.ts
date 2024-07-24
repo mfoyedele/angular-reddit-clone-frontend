@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { SubredditModel } from '../subreddit-response';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SubredditService } from '../subreddit.service';
 import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-create-subreddit',
   templateUrl: './create-subreddit.component.html',
-  styleUrls: ['./create-subreddit.component.css']
+  styleUrls: ['./create-subreddit.component.css'],
+  standalone: true,
+  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule]
 })
 export class CreateSubredditComponent implements OnInit {
   createSubredditForm: FormGroup;

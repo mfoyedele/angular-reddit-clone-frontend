@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/shared/post.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostModel } from 'src/app/shared/post-model';
-import { throwError } from 'rxjs';
+import { first, throwError } from 'rxjs';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommentPayload } from 'src/app/comment/comment.payload';
@@ -24,6 +24,7 @@ export class ViewPostComponent implements OnInit {
   post!: PostModel;
   commentForm: FormGroup;
   commentPayload: CommentPayload;
+  submitted = false;
   comments!: CommentPayload[];
 
   constructor(private postService: PostService, private activateRoute: ActivatedRoute,
@@ -44,14 +45,28 @@ export class ViewPostComponent implements OnInit {
     this.getCommentsForPost();
   }
 
+   // convenience getter for easy access to form fields
+   get f() { return this.commentForm.controls; }
+
   postComment() {
-    this.commentPayload.text = this.commentForm.get('text').value;
-    this.commentService.postComment(this.commentPayload).subscribe(data => {
-      this.commentForm.get('text').setValue('');
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.commentForm.invalid) {
+        return;
+    }
+
+    this.commentService.postComment(this.commentForm.value)
+    .pipe(first())
+    .subscribe({
+        next: () => {
+      this.commentForm.value.setValue('');
       this.getCommentsForPost();
-    }, error => {
+        },
+     error:error => {
       throwError(error);
-    })
+     }
+    });
   }
 
   private getPostById() {

@@ -4,18 +4,22 @@ import { ActivatedRoute } from '@angular/router';
 import { CommentService } from 'src/app/comment/comment.service';
 import { PostModel } from 'src/app/shared/post-model';
 import { CommentPayload } from 'src/app/comment/comment.payload';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  templateUrl: './user-profile.component.html',  
+  styleUrls: ['./user-profile.component.css'],
+  standalone: true,
+  imports: [NgClass, NgIf, CommonModule]
+
 })
 export class UserProfileComponent implements OnInit {
   name: string;
-  posts: PostModel[];
-  comments: CommentPayload[];
-  postLength: number;
-  commentLength: number;
+  posts!: PostModel[];
+  comments!: CommentPayload[];
+  postLength!: number;
+  commentLength!: number;
 
   constructor(private activatedRoute: ActivatedRoute, private postService: PostService,
     private commentService: CommentService) {

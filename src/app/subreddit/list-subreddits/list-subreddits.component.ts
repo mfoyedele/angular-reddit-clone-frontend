@@ -3,13 +3,15 @@ import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { SubredditModel } from '../subreddit-response';
 import { SubredditService } from '../subreddit.service';
 import { throwError } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { SideBarComponent } from "../../shared/side-bar/side-bar.component";
 
 @Component({
   selector: 'app-list-subreddits',
   templateUrl: './list-subreddits.component.html',
   styleUrls: ['./list-subreddits.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, CommonModule]
+  imports: [NgClass, NgIf, CommonModule, RouterLink, SideBarComponent]
 })
 export class ListSubredditsComponent implements OnInit {
 

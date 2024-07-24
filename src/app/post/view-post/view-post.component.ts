@@ -1,24 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/shared/post.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostModel } from 'src/app/shared/post-model';
 import { throwError } from 'rxjs';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CommentPayload } from 'src/app/comment/comment.payload';
 import { CommentService } from 'src/app/comment/comment.service';
+import { SideBarComponent } from "../../shared/side-bar/side-bar.component";
+import { SubredditSideBarComponent } from "../../shared/subreddit-side-bar/subreddit-side-bar.component";
 
 @Component({
   selector: 'app-view-post',
   templateUrl: './view-post.component.html',
-  styleUrls: ['./view-post.component.css']
+  styleUrls: ['./view-post.component.css'],
+  standalone: true,
+  imports: [NgClass, NgIf, RouterLink, CommonModule, SideBarComponent, SubredditSideBarComponent]
 })
 export class ViewPostComponent implements OnInit {
 
   postId: number;
-  post: PostModel;
+  post!: PostModel;
   commentForm: FormGroup;
   commentPayload: CommentPayload;
-  comments: CommentPayload[];
+  comments!: CommentPayload[];
 
   constructor(private postService: PostService, private activateRoute: ActivatedRoute,
     private commentService: CommentService, private router: Router) {

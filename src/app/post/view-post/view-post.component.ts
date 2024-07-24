@@ -4,18 +4,19 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PostModel } from 'src/app/shared/post-model';
 import { throwError } from 'rxjs';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommentPayload } from 'src/app/comment/comment.payload';
 import { CommentService } from 'src/app/comment/comment.service';
 import { SideBarComponent } from "../../shared/side-bar/side-bar.component";
 import { SubredditSideBarComponent } from "../../shared/subreddit-side-bar/subreddit-side-bar.component";
+import { VoteButtonComponent } from "../../shared/vote-button/vote-button.component";
 
 @Component({
   selector: 'app-view-post',
   templateUrl: './view-post.component.html',
   styleUrls: ['./view-post.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink, CommonModule, SideBarComponent, SubredditSideBarComponent]
+  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule, SideBarComponent, SubredditSideBarComponent, VoteButtonComponent]
 })
 export class ViewPostComponent implements OnInit {
 

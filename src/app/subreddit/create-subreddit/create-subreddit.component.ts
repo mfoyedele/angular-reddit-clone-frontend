@@ -4,7 +4,7 @@ import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { SubredditModel } from '../subreddit-response';
 import { Router, RouterLink } from '@angular/router';
 import { SubredditService } from '../subreddit.service';
-import { throwError } from 'rxjs';
+import { first, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-create-subreddit',
@@ -16,6 +16,7 @@ import { throwError } from 'rxjs';
 export class CreateSubredditComponent implements OnInit {
   createSubredditForm: FormGroup;
   subredditModel: SubredditModel;
+  submitted = false;
   title = new FormControl('');
   description = new FormControl('');
 
@@ -37,15 +38,30 @@ export class CreateSubredditComponent implements OnInit {
     this.router.navigateByUrl('/');
   }
 
+  // convenience getter for easy access to form fields
+  get f() { return this.createSubredditForm.controls; }
+
+
   createSubreddit() {
-    this.subredditModel.name = this.createSubredditForm.get('title')
-    .value;
-    this.subredditModel.description = this.createSubredditForm.get('description')
-    .value;
-    this.subredditService.createSubreddit(this.subredditModel).subscribe(data => {
-      this.router.navigateByUrl('/list-subreddits');
-    }, error => {
-      throwError(error);
-    })
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.createSubredditForm.invalid) {
+        return;
+    }
+
+   
+    this.subredditService.createSubreddit(this.createSubredditForm.value)
+    .pipe(first())
+    .subscribe({
+        next: () => {
+            
+        this.router.navigateByUrl('/list-subreddits');
+           
+    }, 
+    error:error => {
+        throwError(error);
+    }
+    });
   }
 }

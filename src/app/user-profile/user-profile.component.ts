@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from 'src/app/shared/post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { CommentService } from 'src/app/comment/comment.service';
 import { PostModel } from 'src/app/shared/post-model';
 import { CommentPayload } from 'src/app/comment/comment.payload';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
+import { PostTileComponent } from "../shared/post-tile/post-tile.component";
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',  
   styleUrls: ['./user-profile.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, CommonModule]
+  imports: [NgClass, NgIf, CommonModule, RouterLink, PostTileComponent]
 
 })
 export class UserProfileComponent implements OnInit {

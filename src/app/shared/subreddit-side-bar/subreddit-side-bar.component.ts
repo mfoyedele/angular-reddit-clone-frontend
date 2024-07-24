@@ -12,7 +12,7 @@ import { NgClass, NgIf } from '@angular/common';
 })
 export class SubredditSideBarComponent implements OnInit {
   subreddits: Array<SubredditModel> = [];
-  displayViewAll: boolean;
+  displayViewAll!: boolean;
 
   constructor(private subredditService: SubredditService) {
     this.subredditService.getAllSubreddits().subscribe(data => {

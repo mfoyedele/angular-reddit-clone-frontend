@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { SubredditService } from 'src/app/subreddit/subreddit.service';
 import { SubredditModel } from 'src/app/subreddit/subreddit-response';
-import { NgClass, NgIf } from '@angular/common';
+import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-subreddit-side-bar',
   templateUrl: './subreddit-side-bar.component.html',
   styleUrls: ['./subreddit-side-bar.component.css'],
   standalone: true,    
-  imports: [NgClass, NgIf]
+  imports: [NgClass, NgIf, CommonModule]
 })
 export class SubredditSideBarComponent implements OnInit {
   subreddits: Array<SubredditModel> = [];

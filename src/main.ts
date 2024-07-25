@@ -1,6 +1,6 @@
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptors } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { AppComponent } from '@app/app.component';
 import { jwtInterceptor, errorInterceptor, TokenInterceptor } from '@app/_helpers'
@@ -13,10 +13,11 @@ bootstrapApplication(AppComponent, {
         provideHttpClient(
             withInterceptors([
                 jwtInterceptor, 
-                errorInterceptor,                
+                errorInterceptor,               
 
             ])
-        ),        
+        ),  
+        HttpClientModule,      
             {
               provide: HTTP_INTERCEPTORS,
               useClass: TokenInterceptor,

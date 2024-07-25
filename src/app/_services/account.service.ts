@@ -36,11 +36,11 @@ export class AccountService {
     }
 
     register(signupRequestPayload: SignupRequestPayload): Observable<any> {
-        return this.httpClient.post(`${environment.apiUrl}/api/auth/signup`,  signupRequestPayload, { responseType: 'text' });
+        return this.httpClient.post('http://localhost:8080/api/auth/signup',  signupRequestPayload, { responseType: 'text' });
     }
 
     login(loginRequestPayload: LoginRequestPayload): Observable<boolean> {
-        return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/api/auth/login`, loginRequestPayload )
+        return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/login', loginRequestPayload )
             .pipe(map(data => {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem('authenticationToken', data.authenticationToken);
@@ -59,7 +59,7 @@ export class AccountService {
       }
     
       refreshToken() {
-        return this.httpClient.post<LoginResponse>(`${environment.apiUrl}/api/auth/refresh/token`,
+        return this.httpClient.post<LoginResponse>('http://localhost:8080/api/auth/refresh/token',
           this.refreshTokenPayload)
           .pipe(tap(response => {
             localStorage.removeItem('authenticationToken');

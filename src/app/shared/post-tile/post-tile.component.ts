@@ -18,7 +18,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 export class PostTileComponent implements OnInit {
 
   faComments = faComments;
-  @Input() posts!: PostModel[];
+  @Input()
+  posts: PostModel[] = [];
 
   constructor(private router: Router) { }
 

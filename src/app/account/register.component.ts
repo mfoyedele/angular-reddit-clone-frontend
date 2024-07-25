@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
 import { AccountService, AlertService } from '@app/_services';
@@ -10,7 +10,7 @@ import { SignupRequestPayload } from '@app/_models';
 @Component({
     templateUrl: 'register.component.html', styleUrls: ['register.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink]
+    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink, FormsModule]
 })
 export class RegisterComponent implements OnInit {
     signupRequestPayload: SignupRequestPayload;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { SubredditModel } from '../subreddit-response';
 import { Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { first, throwError } from 'rxjs';
   templateUrl: './create-subreddit.component.html',
   styleUrls: ['./create-subreddit.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule]
+  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule, FormsModule]
 })
 export class CreateSubredditComponent implements OnInit {
   createSubredditForm: FormGroup;

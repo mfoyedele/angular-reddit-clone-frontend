@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { LoginRequestPayload } from '@app/_models';
 @Component({
     templateUrl: 'login.component.html', styleUrls: ['login.component.css'],
     standalone: true,
-    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink, CommonModule]
+    imports: [ReactiveFormsModule, NgClass, NgIf, RouterLink, CommonModule, FormsModule]
 })
 export class LoginComponent implements OnInit {
     form!: FormGroup;

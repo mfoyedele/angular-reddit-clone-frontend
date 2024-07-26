@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { SubredditModel } from '../subreddit-response';
 import { Router, RouterLink } from '@angular/router';
@@ -11,20 +11,17 @@ import { first, throwError } from 'rxjs';
   templateUrl: './create-subreddit.component.html',
   styleUrls: ['./create-subreddit.component.css'],
   standalone: true,
-  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule, FormsModule]
+  imports: [NgClass, NgIf, RouterLink, CommonModule, ReactiveFormsModule]
 })
 export class CreateSubredditComponent implements OnInit {
-  createSubredditForm: FormGroup;
+  createSubredditForm!: FormGroup;
   subredditModel: SubredditModel;
   submitted = false;
   title = new FormControl('');
   description = new FormControl('');
 
   constructor(private router: Router, private subredditService: SubredditService) {
-    this.createSubredditForm = new FormGroup({
-      title: new FormControl('', Validators.required),
-      description: new FormControl('', Validators.required)
-    });
+    
     this.subredditModel = {
       name: '',
       description: ''
@@ -32,6 +29,10 @@ export class CreateSubredditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.createSubredditForm = new FormGroup({
+      title: new FormControl('', Validators.required),
+      description: new FormControl('', Validators.required)
+    });
   }
 
   discard() {

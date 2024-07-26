@@ -8,7 +8,7 @@ import { VoteService } from '../vote.service';
 import { AccountService } from '@app/_services';
 import { PostService } from '../post.service';
 import { throwError } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
+import { AlertService } from '@app/_services';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 
 @Component({
@@ -30,7 +30,7 @@ export class VoteButtonComponent implements OnInit {
 
   constructor(private voteService: VoteService,
     private authService: AccountService,
-    private postService: PostService, private toastr: ToastrService) {
+    private postService: PostService, private toastr: AlertService) {
       
     this.votePayload = {
       voteType: undefined,
@@ -60,7 +60,7 @@ export class VoteButtonComponent implements OnInit {
     this.voteService.vote(this.votePayload).subscribe(() => {
       this.updateVoteDetails();
     }, error => {
-      this.toastr.error(error.error.message);
+      this.toastr.error(error.error.message);      
       throwError(error);
     });
   }

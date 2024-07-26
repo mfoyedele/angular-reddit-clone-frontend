@@ -12,6 +12,9 @@ import { LoginResponse } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
+  private userSubject: BehaviorSubject<LoginResponse | null>;
+    public user: Observable<LoginResponse | null>;
+
   @Output() loggedIn: EventEmitter<boolean> = new EventEmitter();
   @Output() username: EventEmitter<string> = new EventEmitter();
 
@@ -19,9 +22,7 @@ export class AccountService {
     refreshToken: this.getRefreshToken(),
     username: this.getUserName()
   }
-  
-    private userSubject: BehaviorSubject<LoginResponse | null>;
-    public user: Observable<LoginResponse | null>;
+     
 
     constructor(
         private router: Router,
@@ -54,7 +55,7 @@ export class AccountService {
             }));
     }
 
-    getJwtToken() {
+    getJwtToken():any {
         return localStorage.getItem('authenticationToken');
       }
     
@@ -83,6 +84,7 @@ export class AccountService {
         localStorage.removeItem('username');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('expiresAt');
+
       }
     
       getUserName() {

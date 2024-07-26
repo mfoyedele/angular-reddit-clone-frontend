@@ -12,12 +12,11 @@ bootstrapApplication(AppComponent, {
         provideRouter(APP_ROUTES),
         provideHttpClient(
             withInterceptors([
-                jwtInterceptor, 
+                // jwtInterceptor, 
                 errorInterceptor,               
 
             ])
-        ),  
-        HttpClientModule,      
+        ),        
             {
               provide: HTTP_INTERCEPTORS,
               useClass: TokenInterceptor,

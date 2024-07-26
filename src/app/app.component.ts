@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 @Component({
     selector: 'app-root', templateUrl: 'app.component.html',
     standalone: true,
-    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, HttpClientModule, CommonModule, AlertComponent]
+    imports: [NgIf, RouterOutlet, RouterLink, RouterLinkActive, CommonModule, AlertComponent]
 })
 export class AppComponent {
     title = 'angular-reddit-clone';

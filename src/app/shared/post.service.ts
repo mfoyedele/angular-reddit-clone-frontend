@@ -12,18 +12,18 @@ export class PostService {
   constructor(private http: HttpClient) { }
 
   getAllPosts(): Observable<Array<PostModel>> {
-    return this.http.get<Array<PostModel>>('http://localhost:8080/api/posts');
+    return this.http.get<Array<PostModel>>(`${environment.apiUrl}/api/posts');
   }
 
   createPost(postPayload: CreatePostPayload): Observable<any> {
-    return this.http.post('http://localhost:8080/api/posts', postPayload);
+    return this.http.post(`${environment.apiUrl}/api/posts', postPayload);
   }
 
   getPost(id: number | undefined): Observable<PostModel> {
-    return this.http.get<PostModel>('http://localhost:8080/api/posts/' + id);
+    return this.http.get<PostModel>(`${environment.apiUrl}/api/posts/' + id);
   }
 
   getAllPostsByUser(name: string): Observable<PostModel[]> {
-    return this.http.get<PostModel[]>('http://localhost:8080/api/posts/by-user' + name);
+    return this.http.get<PostModel[]>(`${environment.apiUrl}/api/posts/by-user' + name);
   }
 }

@@ -7,7 +7,7 @@ import { VoteType } from './vote-type';
 import { VoteService } from '../vote.service';
 import { AccountService } from '@app/_services';
 import { PostService } from '../post.service';
-import { throwError } from 'rxjs';
+import { first, throwError } from 'rxjs';
 import { AlertService } from '@app/_services';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 
@@ -57,11 +57,15 @@ export class VoteButtonComponent implements OnInit {
 
   private vote() {
     this.votePayload.postId = this.post.id;
-    this.voteService.vote(this.votePayload).subscribe(() => {
+    this.voteService.vote(this.votePayload)
+    .pipe(first())
+    .subscribe({
+      next: () => {
       this.updateVoteDetails();
-    }, error => {
+    }, error:error => {
       this.toastr.error(error.error.message);      
       throwError(error);
+    }
     });
   }
 

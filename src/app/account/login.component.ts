@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
     registerSuccessMessage: string = '';
     submitted = false;
     isError!: boolean;
-    // length!: number;
 
     constructor(
         private formBuilder: FormBuilder,        

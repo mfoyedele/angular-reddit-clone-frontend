@@ -5,14 +5,17 @@ import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptor
 import { AppComponent } from '@app/app.component';
 import { jwtInterceptor, errorInterceptor, TokenInterceptor } from '@app/_helpers'
 
+import { httpInterceptorProviders } from '@app/_helpers/auth.interceptor';
+
 import { APP_ROUTES } from '@app/app.routes';
 
 bootstrapApplication(AppComponent, {
     providers: [
+        httpInterceptorProviders,
         provideRouter(APP_ROUTES),
         provideHttpClient(
             withInterceptors([
-                // jwtInterceptor, 
+                jwtInterceptor, 
                 errorInterceptor,               
 
             ])

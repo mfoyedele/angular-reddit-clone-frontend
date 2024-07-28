@@ -15,7 +15,7 @@ import { LoginRequestPayload } from '@app/_models';
 })
 export class LoginComponent implements OnInit {
     form!: FormGroup;
-    loginRequestPayload: LoginRequestPayload;
+    loginRequestPayload!: LoginRequestPayload;
     loading = false;
     registerSuccessMessage: string = '';
     submitted = false;

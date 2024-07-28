@@ -11,20 +11,22 @@ import { APP_ROUTES } from '@app/app.routes';
 
 bootstrapApplication(AppComponent, {
     providers: [
-        httpInterceptorProviders,
+        // httpInterceptorProviders,
         provideRouter(APP_ROUTES),
         provideHttpClient(
             withInterceptors([
                 jwtInterceptor, 
                 errorInterceptor,               
-
+                
             ])
         ),        
-            {
-              provide: HTTP_INTERCEPTORS,
-              useClass: TokenInterceptor,
-              multi: true
-            }
+        // JwtInterceptor,
+
+            // {
+            //   provide: HTTP_INTERCEPTORS,
+            //   useClass: TokenInterceptor,
+            //   multi: true
+            // }
           
     ]
 });

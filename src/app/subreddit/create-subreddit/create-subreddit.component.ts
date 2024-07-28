@@ -53,10 +53,9 @@ export class CreateSubredditComponent implements OnInit {
 
    
     this.subredditService.createSubreddit(this.createSubredditForm.value)
-    .pipe(first())
     .subscribe({
-        next: () => {
-            
+        next: data => {
+          console.log(data)            
         this.router.navigateByUrl('/list-subreddits');
            
     }, 

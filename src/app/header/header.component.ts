@@ -35,6 +35,6 @@ import { AccountService } from '@app/_services';
       logout() {
         this.authService.logout();
         this.isLoggedIn = false;
-        this.router.navigateByUrl('');
+        this.router.navigateByUrl('/account/login');
       }
 }

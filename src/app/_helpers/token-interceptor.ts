@@ -30,7 +30,7 @@
 //                 if (error instanceof HttpErrorResponse && error.status === 403) {
 //                     return this.handleAuthErrors(req, next);
 //                 } else {
-//                     return throwError(error);
+//                     return throwError(() => error);
 //                 }
 //             })
 //         );
@@ -64,7 +64,7 @@
 //             setHeaders: { Authorization: `Bearer ${jwtToken}` }
 //         });
 //     }
-// }
+//  }
 
 
 
@@ -104,7 +104,7 @@ export class TokenInterceptor implements HttpInterceptor {
                     && error.status === 403) {
                     return this.handleAuthErrors(req, next);
                 } else {
-                    return throwError(error);
+                    return throwError(() => error);
                 }
             }));
         }

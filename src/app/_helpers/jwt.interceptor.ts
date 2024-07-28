@@ -23,7 +23,7 @@ export function jwtInterceptor(request: HttpRequest<any>, next: HttpHandlerFn) {
 
 
 // import { inject, Injectable } from '@angular/core';
-// import { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptor, HttpHandler, HttpErrorResponse } from '@angular/common/http';
+// import { HttpRequest, HttpHandlerFn, HttpEvent, HttpInterceptor, HttpHandler, HttpErrorResponse, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { Observable, BehaviorSubject, throwError } from 'rxjs';
 // import { catchError, switchMap, take, filter } from 'rxjs/operators';
 
@@ -92,3 +92,7 @@ export function jwtInterceptor(request: HttpRequest<any>, next: HttpHandlerFn) {
 //         }
 //     }
 // }
+
+// export const httpInterceptorProviders = [
+//     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+//   ];

@@ -17,7 +17,7 @@ export class CreateSubredditComponent implements OnInit {
   createSubredditForm!: FormGroup;
   subredditModel: SubredditModel;
   submitted = false;
-  title = new FormControl('');
+  name = new FormControl('');
   description = new FormControl('');
 
   constructor(private router: Router, private subredditService: SubredditService) {
@@ -30,7 +30,7 @@ export class CreateSubredditComponent implements OnInit {
 
   ngOnInit() {
     this.createSubredditForm = new FormGroup({
-      title: new FormControl('', Validators.required),
+      name: new FormControl('', Validators.required),
       description: new FormControl('', Validators.required)
     });
   }

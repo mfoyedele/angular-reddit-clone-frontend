@@ -14,6 +14,7 @@ import { EventBusService } from '@app/_shared/event-bus.service';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+
 @Injectable({ providedIn: 'root' })
 export class AccountService {
   private userSubject: BehaviorSubject<LoginResponse | null>;

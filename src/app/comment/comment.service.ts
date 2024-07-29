@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommentPayload } from './comment.payload';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 
+const httpHeaders: HttpHeaders = new HttpHeaders({
+  Authorization: 'Bearer JWT-token'
+});
 @Injectable({
   providedIn: 'root'
 })
@@ -16,7 +19,7 @@ export class CommentService {
   }
 
   postComment(commentPayload: CommentPayload): Observable<any> {
-    return this.httpClient.post<any>(`${environment.apiUrl}/api/comments`, commentPayload);
+    return this.httpClient.post<any>(`${environment.apiUrl}/api/comments`, commentPayload, { headers: httpHeaders });
   }
 
   getAllCommentsByUser(name: string) {

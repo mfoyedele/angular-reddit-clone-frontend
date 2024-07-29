@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SubredditModel } from './subreddit-response';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 
+const httpHeaders: HttpHeaders = new HttpHeaders({
+  Authorization: 'Bearer JWT-token'
+});
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +19,6 @@ export class SubredditService {
 
   createSubreddit(subredditModel: SubredditModel): Observable<SubredditModel> {
     return this.http.post<SubredditModel>(`${environment.apiUrl}/api/subreddit`,
-      subredditModel);
+      subredditModel, { headers: httpHeaders } );
   }
 }

@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PostModel } from './post-model';
 import { Observable } from 'rxjs';
 import { CreatePostPayload } from '../post/create-post/create-post.payload';
 import { environment } from '@environments/environment';
+
+const httpHeaders: HttpHeaders = new HttpHeaders({
+  Authorization: 'Bearer JWT-token'
+});
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +21,7 @@ export class PostService {
   }
 
   createPost(postPayload: CreatePostPayload): Observable<any> {
-    return this.http.post(`${environment.apiUrl}/api/posts`, postPayload);
+    return this.http.post(`${environment.apiUrl}/api/posts`, postPayload, { headers: httpHeaders });
   }
 
   getPost(id: number | undefined): Observable<PostModel> {

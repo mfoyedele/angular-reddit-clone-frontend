@@ -11,12 +11,7 @@ export class SubredditService {
   constructor(private http: HttpClient) { }
 
   getAllSubreddits(): Observable<Array<SubredditModel>> {
-    const token = this.getAuthenticationToken();
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      Authorization: `Bearer ${token}`
-    });
-
-    return this.http.get<Array<SubredditModel>>(`${environment.apiUrl}/api/subreddit`, { headers: httpHeaders });
+    return this.http.get<Array<SubredditModel>>(`${environment.apiUrl}/api/subreddit`);
   }
 
   createSubreddit(subredditModel: SubredditModel): Observable<SubredditModel> {

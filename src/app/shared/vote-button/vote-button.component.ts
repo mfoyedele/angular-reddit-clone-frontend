@@ -63,7 +63,7 @@ export class VoteButtonComponent implements OnInit {
         this.updateVoteDetails();
         console.log(data)
     }, error:error => {
-      this.toastr.error("Failed vote");      
+      // this.toastr.error("Failed vote");      
       return throwError(() => error);
     }
     });

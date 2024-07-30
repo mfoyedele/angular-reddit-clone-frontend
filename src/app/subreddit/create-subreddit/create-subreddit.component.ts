@@ -60,7 +60,7 @@ export class CreateSubredditComponent implements OnInit {
            
     }, 
     error:error => {
-        throwError(error);
+      return throwError(() => error);
     }
     });
   }

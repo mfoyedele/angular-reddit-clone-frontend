@@ -32,7 +32,8 @@ export class ViewPostComponent implements OnInit {
     this.postId = this.activateRoute.snapshot.params.id;
 
     this.commentForm = new FormGroup({
-      text: new FormControl('', Validators.required)
+      text: new FormControl('', Validators.required),
+      
     });
     this.commentPayload = {
       text: '',
@@ -45,43 +46,45 @@ export class ViewPostComponent implements OnInit {
     this.getCommentsForPost();
   }
 
-   // convenience getter for easy access to form fields
-   get f() { return this.commentForm.controls; }
-
   postComment() {
-    this.submitted = true;
+    
+    this.commentPayload.text = this.commentForm.get('text')?.value;
 
-    // stop here if form is invalid
-    if (this.commentForm.invalid) {
-        return;
-    }
-
-    this.commentService.postComment(this.commentForm.value)
+    this.commentService.postComment(this.commentPayload)
     .pipe(first())
     .subscribe({
         next: () => {
-      this.commentForm.value.setValue('');
+          // console.log(data)
+      this.commentForm.get('text')?.setValue('');
       this.getCommentsForPost();
         },
      error:error => {
-      throwError(error);
+      return throwError(() => error);
      }
     });
   }
 
   private getPostById() {
-    this.postService.getPost(this.postId).subscribe(data => {
+    this.postService.getPost(this.postId)
+    .pipe(first())
+    .subscribe({
+      next: data => {
       this.post = data;
-    }, error => {
-      throwError(error);
+    }, error:error => {
+      return throwError(() => error);
+    }
     });
   }
 
   private getCommentsForPost() {
-    this.commentService.getAllCommentsForPost(this.postId).subscribe(data => {
+    this.commentService.getAllCommentsForPost(this.postId)
+    .pipe(first())
+    .subscribe({
+      next: data => {
       this.comments = data;
-    }, error => {
-      throwError(error);
+    }, error:error => {
+      return throwError(() => error);
+    }
     });
   }
 

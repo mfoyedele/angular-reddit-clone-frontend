@@ -26,7 +26,7 @@ export class PostService {
     return this.http.post(`${environment.apiUrl}/api/posts`, postPayload, { headers: httpHeaders });
   }
 
-  getPost(id: number | undefined): Observable<PostModel> {
+  getPost(id?: number): Observable<PostModel> {
     return this.http.get<PostModel>(`${environment.apiUrl}/api/posts/` + id);
   }
 

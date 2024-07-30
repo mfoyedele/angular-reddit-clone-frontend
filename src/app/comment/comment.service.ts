@@ -4,7 +4,6 @@ import { CommentPayload } from './comment.payload';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +11,9 @@ export class CommentService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllCommentsForPost(postId: number): Observable<CommentPayload[]> {
-    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-post` + postId);
+  getAllCommentsForPost(postId?: number): Observable<CommentPayload[]> {    
+
+    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-post/` + postId);
   }
 
   postComment(commentPayload: CommentPayload): Observable<any> {
@@ -21,15 +21,16 @@ export class CommentService {
     const httpHeaders: HttpHeaders = new HttpHeaders({
       Authorization: `Bearer ${token}`
     });
-    
+
     return this.httpClient.post<any>(`${environment.apiUrl}/api/comments`, commentPayload, { headers: httpHeaders });
   }
 
-  getAllCommentsByUser(name: string) {
-    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-user` + name);
+  getAllCommentsByUser(name: string): Observable<CommentPayload[]> {
+    
+    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-user/` + name);
   }
 
-  getAuthenticationToken(): string | null {
+  private getAuthenticationToken(): string | null {
     return localStorage.getItem('authenticationToken');
   }
 }

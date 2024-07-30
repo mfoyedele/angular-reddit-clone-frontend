@@ -65,7 +65,7 @@ export class CreatePostComponent implements OnInit {
             this.router.navigateByUrl('/');
         },
     error: error => {
-      throwError(error);
+      return throwError(() => error);
     }
   });
   }

@@ -55,7 +55,7 @@ export class ViewPostComponent implements OnInit {
     .subscribe({
         next: () => {
           // console.log(data)
-      this.commentForm.get('text')?.setValue('');
+      this.commentForm.reset();
       this.getCommentsForPost();
         },
      error:error => {

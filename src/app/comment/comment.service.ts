@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { CommentPayload } from './comment.payload';
 import { Observable } from 'rxjs';
 import { environment } from '@environments/environment';
@@ -11,10 +11,16 @@ export class CommentService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getAllCommentsForPost(postId?: number): Observable<CommentPayload[]> {    
+  getAllCommentsForPost(postId: number): Observable<CommentPayload[]> { 
+    const token = this.getAuthenticationToken();
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });   
+    const params = new HttpParams().set('postId', postId.toString());
+    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments`, { headers: httpHeaders, params });
+}
 
-    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-post/` + postId);
-  }
+  
 
   postComment(commentPayload: CommentPayload): Observable<any> {
     const token = this.getAuthenticationToken();

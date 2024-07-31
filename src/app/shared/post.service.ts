@@ -30,9 +30,10 @@ export class PostService {
     return this.http.get<PostModel>(`${environment.apiUrl}/api/posts/` + id);
   }
 
+
   getAllPostsByUser(name: string): Observable<PostModel[]> {
-    return this.http.get<PostModel[]>(`${environment.apiUrl}/api/posts/by-user` + name);
-  }
+    return this.http.get<PostModel[]>(`${environment.apiUrl}/api/posts?username=${name}`);
+}
 
   private getAuthenticationToken(): string | null {
     return localStorage.getItem('authenticationToken');

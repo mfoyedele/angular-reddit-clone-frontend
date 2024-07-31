@@ -32,7 +32,12 @@ export class CommentService {
   }
 
   getAllCommentsByUser(name: string): Observable<CommentPayload[]> {
-    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments?userName=${name}`);
+    const token = this.getAuthenticationToken();
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+
+    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments?userName=${name}`, { headers: httpHeaders });
 }
 
   private getAuthenticationToken(): string | null {

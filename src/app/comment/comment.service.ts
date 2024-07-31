@@ -32,9 +32,8 @@ export class CommentService {
   }
 
   getAllCommentsByUser(name: string): Observable<CommentPayload[]> {
-    
-    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments/by-user/` + name);
-  }
+    return this.httpClient.get<CommentPayload[]>(`${environment.apiUrl}/api/comments?userName=${name}`);
+}
 
   private getAuthenticationToken(): string | null {
     return localStorage.getItem('authenticationToken');

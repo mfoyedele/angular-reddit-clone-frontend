@@ -9,7 +9,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './subreddit-side-bar.component.html',
   styleUrls: ['./subreddit-side-bar.component.css'],
   standalone: true,    
-  imports: [NgClass, NgIf, CommonModule,  RouterLink]
+  imports: [NgClass, NgIf, CommonModule,]
 })
 export class SubredditSideBarComponent implements OnInit {
   subreddits: Array<SubredditModel> = [];
